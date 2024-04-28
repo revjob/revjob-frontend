@@ -2,6 +2,8 @@
 import { Outlet } from 'react-router-dom';
 // Importing the Header component from the components directory
 import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { Footprints } from 'lucide-react';
 
 // Defining the Layout component responsible for rendering the overall layout structure of the application
 export default function Layout() {
@@ -12,6 +14,7 @@ export default function Layout() {
             <Header />
             {/* Rendering the child components of the current route */}
             <Outlet />
+            <Footer />
         </div>
     )
 }

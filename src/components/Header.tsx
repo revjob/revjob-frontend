@@ -40,6 +40,15 @@ export default function Header() {
                                 Home
                             </button>
                         </li>
+                        {/* Navigation link for the ExploreCompany page */}
+                        <li>
+                            <button className="hover:text-gray-300"
+                                // Navigate to the About page when the button is clicked
+                                onClick={() => navigate('/exploreCompanys')}
+                            >
+                                Explore
+                            </button>
+                        </li>
                         {/* Navigation link for the About page */}
                         <li>
                             <button className="hover:text-gray-300"

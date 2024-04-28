@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 // Importing custom components for the application
 import Layout from './pages/Layout'
 import Home from './pages/Home'
+import ExploreCompanies from './pages/ExploreCompanies'
 import About from './pages/About'
 import Pdb from './pages/Pdb'
 
@@ -21,6 +22,7 @@ function App() {
 				<Route path="/" element={<Layout />} >
 					{/* Route for the home page */}
 					<Route path="/" element={<Home />} />
+					<Route path="/exploreCompanys" element={<ExploreCompanies />} />
 					{/* Route for the about page */}
 					<Route path="/about" element={<About />} />
 					<Route path="/pdb" element={<Pdb texto="tchau" />} />
