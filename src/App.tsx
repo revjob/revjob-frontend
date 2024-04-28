@@ -1,36 +1,58 @@
-// Importing useState hook from React to manage state in functional components
-import { useState } from 'react'
-// Importing necessary components from react-router-dom for routing
+import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-// Importing custom components for the application
 import Layout from './pages/Layout'
 import Home from './pages/Home'
 import ExploreCompanies from './pages/ExploreCompanies'
 import About from './pages/About'
 import Pdb from './pages/Pdb'
+import { connectMetamask } from "./utils/connectMetamask";
+import { ThemeProvider } from "@/components/theme-provider";
 
-// Define the main component of the application
+
 function App() {
 
-	// Render the application UI
+	const [account, setAccount] = React.useState<string | null>(null);
+  	const [provider, setProvider] = React.useState<any>(null);
+	const [signer, setSigner] = React.useState<any>(null);
+
+	React.useEffect(() => {
+		if ((window as any).ethereum) {
+		//check if Metamask wallet is installed
+		// setIsMetamaskInstalled(true);
+		setAccount((window as any).ethereum.selectedAddress);
+		}
+	}, []);
+
+	async function connectWallet(): Promise<void> {
+		const connection = await connectMetamask();
+		setAccount(connection?.address);
+		setProvider(connection?.web3Provider);
+		setSigner(connection?.web3Signer);
+	}
+
 	return (
-		// Using BrowserRouter to enable routing in the application
-		<BrowserRouter>
-			{/* Defining routes for different paths in the application */}
-			<Routes>
-				{/* The main layout of the application */}
-				<Route path="/" element={<Layout />} >
-					{/* Route for the home page */}
-					<Route path="/" element={<Home />} />
-					<Route path="/exploreCompanys" element={<ExploreCompanies />} />
-					{/* Route for the about page */}
-					<Route path="/about" element={<About />} />
-					<Route path="/pdb" element={<Pdb texto="tchau" />} />
-				</Route>
-			</Routes>
-		</BrowserRouter>
+		<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+			<BrowserRouter>
+				<Routes>
+					<Route 
+						path="/" 
+						element={
+							<Layout 
+								connectWallet={connectWallet}
+								account={account}
+								signer={signer}
+							/>
+						} 
+					>
+						<Route path="/" element={<Home />} />
+						<Route path="/exploreCompanys" element={<ExploreCompanies />} />
+						<Route path="/about" element={<About />} />
+						<Route path="/pdb" element={<Pdb texto="tchau" />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</ThemeProvider>
 	)
 }
 
-// Exporting the main component to be used in other parts of the application
 export default App

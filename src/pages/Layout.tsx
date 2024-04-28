@@ -1,20 +1,22 @@
-// Importing the Outlet component from 'react-router-dom' which is used for rendering child components of the current route
+// import Footer from '@/components/Footer';
+import { Header } from '@/components/Header';
+import { Toaster } from '@/components/ui/toaster';
 import { Outlet } from 'react-router-dom';
-// Importing the Header component from the components directory
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { Footprints } from 'lucide-react';
 
-// Defining the Layout component responsible for rendering the overall layout structure of the application
-export default function Layout() {
+export default function Layout({ connectWallet, account, signer }: 
+    { connectWallet: any; account: string | null; signer: any;}) {
+
     return (
-        // Container div for the entire layout
-        <div className='w-[100vw] md:h-[100vh] md:flex md:flex-col lg:h-[100vh] lg:flex lg:flex-col overflow-y-auto overflow-x-hidden relative'>
-            {/* Rendering the Header component */}
-            <Header />
-            {/* Rendering the child components of the current route */}
-            <Outlet />
-            <Footer />
+        <div className='w-[100vw] h-[100vh] flex flex-col overflow-x-hidden'>
+            <Header
+                connectWallet={connectWallet}
+                account={account}
+                signer={signer}
+            />
+            <main className=''>
+                <Outlet/>
+            </main>
+            <Toaster />
         </div>
     )
 }
