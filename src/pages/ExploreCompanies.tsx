@@ -3,6 +3,7 @@ import { companyData } from "@/utils/mock";
 
 // Defining the About component responsible for rendering the about page content
 export default function ExploreCompanies() {
+
     return (
         // Container div for the entire about page content
         <div className="flex flex-col w-full items-center justify-center bg-sky-50">
@@ -18,12 +19,13 @@ export default function ExploreCompanies() {
                     <CompanyCard
                         key={index}
                         id={card.id}
-                        fid={card.fid}
                         companyName={card.companyName} 
                         description={card.description}
-                        rating={card.rating}
+                        averageRating={card.averageRating}
                         verifiedAddresses={card.verifiedAddresses}
                         loading={false}
+                        reviews={card.reviews}
+                        salaries={card.salaries}
                     />
                 ))}
             </section> 

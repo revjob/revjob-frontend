@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Layout from './pages/Layout'
 import Home from './pages/Home'
 import ExploreCompanies from './pages/ExploreCompanies'
+import CompanyInfo from './pages/CompanyInfo'
+import CreateContribution from './pages/CreateContribution'
 import About from './pages/About'
 import Pdb from './pages/Pdb'
 import { connectMetamask } from "./utils/connectMetamask";
@@ -45,7 +47,9 @@ function App() {
 						} 
 					>
 						<Route path="/" element={<Home />} />
-						<Route path="/exploreCompanys" element={<ExploreCompanies />} />
+						<Route path="/exploreCompanies" element={<ExploreCompanies />} />
+						<Route path="/exploreCompanies/:companyId" element={<CompanyInfo />} />
+						<Route path="/createContribution" element={<CreateContribution />} />
 						<Route path="/about" element={<About />} />
 						<Route path="/pdb" element={<Pdb texto="tchau" />} />
 					</Route>
